@@ -12,7 +12,7 @@ export class PromptOutput {
 
     constructor(ea,client){
         this.ea = ea;
-        this.client = httpclient;
+        this.client = client;
     }
 
     attached(){
@@ -26,8 +26,11 @@ export class PromptOutput {
                 response = 'retrieving external data record ...';
             } else if (value.startsWith('.switch')){
                 response = 'switching engine ...';
-            }            
-            this.currentindex = this.pos.push({request: value,response: response});
+            } else {
+                this.postvalue = JSON.stringify({"prompt":value});
+                this.post();
+            }           
+            this.currentindex = this.pos.push({request: value,response: response});                        
             window.scrollTo(0, document.body.scrollHeight);
         });
     }
@@ -44,24 +47,19 @@ export class PromptOutput {
             //localStorage.setItem('bdl-fhir-api-key',this.remoteheadervalue);
         }
         let url = this.remoteurl + (id ? '/' + id : '');
-        if (!this.posterror)
+        //if (!this.posterror)
+        let res;
         this.client.fetch(url, {method: 'post', headers: myheaders, body: this.postvalue})
             //.then(response => response.json())// do response.json() for json result
-            .then(data => {
+            .then((response) => response.json())
+            .then((data) => (res = data))
+            .then(() => {
+
                 //console.log('returned data:', data)
-                this.remotevalueraw = data;                
-                try {
-                  
-                  this.remotevalue = data.json();  
-                  console.log('returned data:', this.remotevalue);
-                  this.remotevalueformatted = JSON.stringify(this.remotevalue);
-                } catch(error) {
-                  console.warn('probably zero data returned', error);
-                  console.warn('raw data:', data);                  
-                  this.remotevalue = data;
-                  //this.remotevalueformatted = "";
-                }
-                this.pos[this.currentindex-1] = {request: value,response: this.remotevalue};
+                this.remotevalue = res
+                console.log('returned data:', this.remotevalue);
+                this.currentindex = this.pos.push({request: "",response: this.remotevalue});                        
+                //this.pos[this.currentindex-1] = {request: value,response: this.remotevalue};
             })
             .catch(err => {
             console.warn('probably no data returned',err);

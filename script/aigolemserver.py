@@ -2,6 +2,7 @@ from typing import Union
 
 from fastapi import FastAPI
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 
 from openai import OpenAI,File
 from pathlib import Path
@@ -27,6 +28,19 @@ class Medidetect(BaseModel):
     filter: Union[str, None] = None
 
 app = FastAPI()
+origins = [
+    "https://egolem.online",
+    "http://localhost",
+    "http://localhost:8080",
+]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 import os
 #openai.api_key = os.getenv("OPENAI_API_KEY")
