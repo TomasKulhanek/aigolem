@@ -1,0 +1,7 @@
+<template bindable="href,title,icon">
+  <require from="../w3.css"></require>
+  <a class="w3-button w3-left" style="padding-left:16px;padding-bottom:0px" href="${href}" target="_self">
+    <img if.bind="icon" src="${icon}" alt="${icon}" style="width:120px"/>
+    <span if.bind="!icon">${title}</span>
+  </a>
+</template>

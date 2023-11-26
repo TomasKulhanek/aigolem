@@ -1,0 +1,25 @@
+<template bindable="title,subtitle,href,img,width,imgwidth,spaceafter">
+    <h3 class="w3-center" style="font-weight:bolder" innerhtml.bind="title"></h3>
+    <h4 class="w3-center" innerhtml.bind="subtitle"></h4>
+    <div if.bind="href" class="w3-center">
+        <a href="${href}">
+            <div class="w3-container w3-padding" style="width:${width};display:inline-block">
+                <img style="width:${imgwidth};max-width:80%" src="${img}" alt="" />
+
+            </div>
+        </a>
+    </div>
+    <div if.bind="! href" class="w3-center">
+        <div class="w3-container w3-padding" style="width:${width}; display:inline-block">
+            <img style="width:${imgwidth};max-width:80%" src="${img}" alt="" />
+        </div>
+    </div>
+    <div class="w3-center">
+        <div class="w3-container w3-padding" style="width:${width};display:inline-block">
+
+            <slot></slot>
+
+        </div>
+    </div>
+    <div style="margin:240px!important" if.bind="spaceafter"></div>
+</template>

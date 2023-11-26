@@ -1,0 +1,6 @@
+<template bindable="href,title,type,disabled">
+  <require from="../w3.css"></require>
+  <span if.bind="disabled"><a class="w3-bar-item w3-button w3-right w3-red" href="${href}"  style="pointer-events:none;margin-top:10px;margin-right:10px">${title}</a></span>
+  <span if.bind="!disabled"><a class="w3-bar-item w3-button w3-right w3-red" href="${href}" target="_self" style="margin-top:10px;margin-right:10px">${title}</a></span>
+
+</template>
