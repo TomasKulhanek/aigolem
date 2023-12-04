@@ -1,0 +1,1 @@
+uvicorn aigolemserver:app --reload
