@@ -12,6 +12,3 @@ scripts/ contains python scripts for backend and Jupyter notebooks how the model
 to execute
 
 `uvicorn aigolemserver:app --reload`
-
-
-
