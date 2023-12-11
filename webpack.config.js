@@ -57,8 +57,8 @@ module.exports = ({ production } = {}, { extractCss, analyze, hmr, port, host } 
   output: {
     path: outDir,
     publicPath: baseUrl,
-    filename: 'bodylightweb.bundle.js',
-    sourceMapFilename: 'bodylightweb.bundle.map',
+    filename: 'aigolemweb.bundle.js',
+    sourceMapFilename: 'aigolemweb.bundle.map',
     //filename: production ? '[name].[chunkhash].bundle.js' : '[name].[hash].bundle.js',
     //sourceMapFilename: production ? '[name].[chunkhash].bundle.map' : '[name].[hash].bundle.map',
     //chunkFilename: production ? '[name].[chunkhash].chunk.js' : '[name].[hash].chunk.js'
@@ -137,7 +137,7 @@ module.exports = ({ production } = {}, { extractCss, analyze, hmr, port, host } 
     new DuplicatePackageCheckerPlugin(),
     new AureliaPlugin({
       dist: 'es6',
-      aureliaApp: 'main'
+      aureliaApp: 'aigolemwebcomponents'
     }),
     // ref: https://webpack.js.org/plugins/mini-css-extract-plugin/
     new MiniCssExtractPlugin({ // updated to match the naming conventions for the js files
